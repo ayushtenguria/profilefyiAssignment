@@ -25,28 +25,33 @@ const CartItem = ({
         <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md mr-4" />
         <div>
           <span className="font-medium text-lg">{item.title}</span>
-          <span className="text-gray-500 ml-2">
-            {" "}
-            - ${item.price} x {item.quantity}
-          </span>
+          
         </div>
       </div>
       <div className="flex items-center space-x-2">
+      
+      <span className="text-gray-500 ml-2 mr-4">
+            {" "}
+            - ${item.price}
+          </span>
         <button
           onClick={() => increaseQuantity(item.id)}
-          className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+          className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-700"
         >
           +
         </button>
+        <div className="mx-3 px-3">
+            {item.quantity}
+        </div>
         <button
           onClick={() => decreaseQuantity(item.id)}
-          className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+          className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-700"
         >
           -
         </button>
         <button
           onClick={() => removeFromCart(item.id)}
-          className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+          className="bg-red-500 ml-10 text-white px-3 py-1 rounded hover:bg-red-600"
         >
           Remove
         </button>
