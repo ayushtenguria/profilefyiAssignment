@@ -1,16 +1,9 @@
-'use client'
-
-
-import Image from "next/image";
-import ProductList from "./components/ProductList";
-import { CartProvider } from "./context/cartContext";
+import ProductPage from "./components/ProductPage";
 
 export default function Home() {
   return (
-   
-      <div>
-        <ProductList />
-      </div>
-    
+    <div>
+      <ProductPage />
+    </div>
   );
 }

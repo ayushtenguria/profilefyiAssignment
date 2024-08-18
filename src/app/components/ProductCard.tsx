@@ -1,9 +1,7 @@
-'use client'
-
+"use client";
 
 import React, { useContext } from "react";
 import { CartContext } from "../context/cartContext";
-
 
 interface Product {
   id: number;
@@ -25,10 +23,9 @@ const ProductCard = (props: Product) => {
   const handleAddToCart = () => {
     if (cartContext) {
       console.log("Adding product with ID:", id);
-      cartContext.addToCart({ id, title, price, quantity: 1 });
+      cartContext.addToCart({ id, image, title, price, quantity: 1 });
     }
   };
-  
 
   return (
     <div className="flex flex-col bg-slate-100 shadow-md m-3">

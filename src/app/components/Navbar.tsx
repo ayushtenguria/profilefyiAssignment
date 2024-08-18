@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex justify-between px-10 py-5">
+      <nav className="flex justify-between px-10 py-5 bg-slate-300 shadow-lg">
         <Link href="/">
           <div>
             <img src="/logoipsum.svg" alt="logo" />

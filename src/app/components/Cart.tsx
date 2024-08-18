@@ -1,6 +1,10 @@
-"use client";
+'use client'
+
 import React, { useContext, useState } from "react";
 import { CartContext } from "../context/cartContext";
+import CartItem from "./CartItem";
+import CouponInput from "./CouponInput";
+import CartSummary from "./CartSummary";
 
 // Mock coupon data
 const coupons = [
@@ -18,7 +22,6 @@ const coupons = [
 
 const CartPage = () => {
   const cartContext = useContext(CartContext);
-  const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [couponError, setCouponError] = useState("");
 
@@ -26,18 +29,13 @@ const CartPage = () => {
     return <p>Error: Cart context is not available.</p>;
   }
 
-  const {
-    cart,
-    removeFromCart,
-    clearCart,
-    increaseQuantity,
-    decreaseQuantity,
-  } = cartContext;
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
+    cartContext;
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const totalWithDiscount = (total - discount).toFixed(2);
 
-  const applyCoupon = () => {
+  const applyCoupon = (couponCode: string) => {
     const foundCoupon = coupons.find((coupon) => coupon.code === couponCode);
     if (foundCoupon) {
       if (foundCoupon.type === "percentage") {
@@ -61,65 +59,21 @@ const CartPage = () => {
         <>
           <ul className="space-y-4">
             {cart.map((item) => (
-              <li
+              <CartItem
                 key={item.id}
-                className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
-              >
-                <div>
-                  <span className="font-medium text-lg">{item.title}</span>
-                  <span className="text-gray-500 ml-2">
-                    {" "}
-                    - ${item.price} x {item.quantity}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => increaseQuantity(item.id)}
-                    className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={() => decreaseQuantity(item.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                  >
-                    -
-                  </button>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </li>
+                item={item}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
+                removeFromCart={removeFromCart}
+              />
             ))}
           </ul>
 
-          <div className="mt-6">
-            <input
-              type="text"
-              value={couponCode}
-              onChange={(e) => setCouponCode(e.target.value)}
-              placeholder="Enter coupon code"
-              className="border p-2 rounded w-full"
-            />
-            <button
-              onClick={applyCoupon}
-              className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Apply Coupon
-            </button>
-            {couponError && <p className="text-red-500 mt-2">{couponError}</p>}
-          </div>
-
-          <h2 className="text-xl font-semibold mt-6">
-            Total: ${totalWithDiscount}
-          </h2>
-          {discount > 0 && (
-            <p className="text-green-500">You saved: ${discount.toFixed(2)}</p>
-          )}
-          {/* <button onClick={clearCart} className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Clear Cart</button> */}
+          <CouponInput applyCoupon={applyCoupon} couponError={couponError} />
+          <CartSummary
+            totalWithDiscount={parseFloat(totalWithDiscount)}
+            discount={discount}
+          />
         </>
       )}
     </div>
