@@ -28,12 +28,16 @@ const ProductCard = (props: Product) => {
   };
 
   return (
-    <div className="flex flex-col bg-slate-100 shadow-md m-3">
-      <div>
-        <img src={image} className="bg-cover h-96 w-80" alt={title} />
+    <div className="flex flex-col shadow-md m-3 w-80 h-96 overflow-hidden">
+      <div className="w-full h-2/3">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
       </div>
-      <div className="p-4 space-y-2">
-        <p className="text-sm">{title}</p>
+      <div className="p-4 h-1/3 flex flex-col justify-between">
+        <p className="text-sm font-medium">{title}</p>
         <p className="font-semibold text-sm">$ {price}</p>
         <button
           onClick={handleAddToCart}

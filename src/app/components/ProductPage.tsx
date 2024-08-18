@@ -4,7 +4,7 @@ import ProductList from "./ProductList";
 const ProductPage = () => {
   return (
     <main>
-      <div>
+      <div className="bg-slate-100">
         <ProductList />
       </div>
     </main>
