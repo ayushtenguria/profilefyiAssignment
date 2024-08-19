@@ -43,10 +43,10 @@ const CartPage = () => {
       } else if (foundCoupon.type === "flat") {
         setDiscount(foundCoupon.value);
       }
-      setCouponError(""); // Clear any previous error
+      setCouponError(""); 
     } else {
       setCouponError("Invalid coupon code");
-      setDiscount(0); // Reset discount
+      setDiscount(0); 
     }
   };
 
