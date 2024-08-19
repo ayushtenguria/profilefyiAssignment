@@ -1,14 +1,14 @@
 "use client";
 import React, { useContext } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { CartContext } from "../context/cartContext"; // Adjust the import path as needed
+import { CartContext } from "../context/cartContext"; 
 import Link from "next/link";
 
 const Navbar = () => {
   const cartContext = useContext(CartContext);
 
   if (!cartContext) {
-    return null; // or some error handling
+    return null;
   }
 
   const { cart } = cartContext;
